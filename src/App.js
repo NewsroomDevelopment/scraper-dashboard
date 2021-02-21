@@ -1,18 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// App.js
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import MajorsChart from './containers/MajorsLine';
 
-import Home from './containers/Home';
+const datas = [
+    [10, 30, 40, 20],
+    [10, 40, 30, 20, 50, 10],
+    [60, 30, 40, 20, 30]
+]
+var i = 0;
 
 function App() {
-  return (
-    <Router basename={process.env.PUBLIC_URL}>
-    <Switch>
-      <Route exact path='/' component={Home} />
-      {/* <Route exact path='/' component={} />
-      <Route exact path='/' component={} /> */}
-    </Switch>
-  </Router>
-  );
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        changeData();
+    }, []);
+
+    const changeData = () => {
+        setData(datas[i++]);
+        if(i === datas.length) i = 0;
+    }
+
+
+    return (
+        <div className="App">
+            <h2>Graphs with React</h2>
+            <button onClick={changeData}>Change Data</button>
+            <MajorsChart width={600} height={400} data={data} />
+        </div>
+    );
 }
 
 export default App;
