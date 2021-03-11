@@ -19,7 +19,7 @@ class App extends React.Component {
             data : datas[0],
             width : 600,
             height : 400,
-            id : "root"
+            id : "bar"
         }
     }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
             <h2>Graphs with React</h2>
             <button onClick={this.changeChart}>Change Data</button>
         <BarGraph id = {this.state.id} data={this.state.data} width={this.state.width} height={this.state.height} />
-
+        
         </div>
 
     );
