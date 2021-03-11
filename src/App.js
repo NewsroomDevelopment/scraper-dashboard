@@ -23,7 +23,8 @@ class App extends React.Component {
         }
     }
 
-    changeColor = () => {
+
+    changeChart = () => {
         i++
         if(i === datas.length) i = 0;
         this.setState({data: datas[i]});
