@@ -6,8 +6,14 @@ import React, { useRef, useEffect } from 'react';
 
 
 
+const datas = [
+    [[1,2,3,4],[10, 30, 40, 20]],
+    [[1,2,3,4,5,6],[10, 40, 30, 20, 50, 10]],
+    [[1,2,3,4,5],[60, 30, 40, 20, 30]]
+]
+var i = 0;
 
-function BarGraph ({ width, height, data, id }){
+function CreateBarGraph ({ width, height, data, id }){
     const ref = useRef();
     var data_x = data[0];
     var data_y = data[1];
@@ -137,7 +143,6 @@ function BarGraph ({ width, height, data, id }){
             .enter()
             .append("rect")
             .on('mouseover', function (d, i) {
-                var coords = d3.pointer(d)
                 d3.select(this).transition("color")
                     .duration('50')
                     .attr('opacity', '.85')
@@ -179,8 +184,6 @@ function BarGraph ({ width, height, data, id }){
             .remove()    
     
     }
-
-
     return (
         <div className="chart" id = {id}>
             <svg ref={ref}>
@@ -188,6 +191,41 @@ function BarGraph ({ width, height, data, id }){
         </div>
         
     )
+    
+}
+
+class BarGraph extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            data : datas[0],
+            width : 600,
+            height : 400,
+            id : "bar"
+        }
+    }
+
+
+    changeChart = () => {
+        i++
+        if(i === datas.length) i = 0;
+        this.setState({data: datas[i]});
+
+    }
+
+    render(){
+        return (
+        <div className="BarGraphs" >
+        
+            <h2>Graphs with React</h2>
+            <button onClick={this.changeChart}>Change Data</button>
+        <CreateBarGraph id = {this.state.id} data={this.state.data} width={this.state.width} height={this.state.height} />
+        
+        </div>
+
+    );
+    }
     
 }
 
