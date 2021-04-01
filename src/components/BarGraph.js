@@ -6,14 +6,10 @@ import React, { useRef, useEffect } from 'react';
 
 
 
-const datas = [
-    [[1,2,3,4],[10, 30, 40, 20]],
-    [[1,2,3,4,5,6],[10, 40, 30, 20, 50, 10]],
-    [[1,2,3,4,5],[60, 30, 40, 20, 30]]
-]
-var i = 0;
+function BarGraph (props){
 
-function CreateBarGraph ({ width, height, data, id }){
+    const {  id, data, width,  height, xaxis, yaxis } = props;
+
     const ref = useRef();
     var data_x = data[0];
     var data_y = data[1];
@@ -33,34 +29,37 @@ function CreateBarGraph ({ width, height, data, id }){
         
         var xScale = d3.scaleBand()
                             .domain(data[0])
-                            .range([0, width])
+                            .range([40, width])
                             .padding(0.6); 
         var yScale = d3.scaleLinear()
                             .domain([0,d3.max(data_y)+10])//change to  if you figure out how to update y axis
                             .range([height, 100]);
     
-        svg.append("g").attr("transform", "translate(" + 0 + "," + 360 + ")")
+        svg.append("g").attr("transform", "translate(" + 0 + "," + (height-40) + ")")
             .call(d3.axisBottom(xScale))
             .attr("id", "xaxis_" + id)
             .append("text")
-                    .attr("x", 310)
+                    .attr("x", width/2+30)
                     .attr("y", 30)
                     .attr("text-anchor", "end")
                     .attr("stroke", "black")
-                    .text("Year");
+                    .attr("letter-spacing", "1.5px")
+                    .text(xaxis);
                 
     
         svg.append("g")
+            
             .attr("transform", "translate(" + 50 + "," + -40 + ")")
             .call(d3.axisLeft(yScale).tickValues(ticks))
             .attr("id", "yaxis_"+id)
             .append("text")
                 .attr("transform", "rotate(-90)")
-                .attr("x", -200)
+                .attr("x", -width/3)
                 .attr("y", -30)
                 .attr("text-anchor", "end")
                 .attr("stroke", "black")
-                .text("#Of Students");
+                .attr("letter-spacing", "1.5px")
+                .text(yaxis);
         
         //hidden tags for hovering over each bar
         svg.append("text")
@@ -87,8 +86,8 @@ function CreateBarGraph ({ width, height, data, id }){
         //reference to axis and update the scale and ticks
         var xScale = d3.scaleBand()
                             .domain(data_x)
-                            .range([0, width])
-                            .padding(0.6);
+                            .range([40, width])
+                            .padding(0.5);
         var yScale = d3.scaleLinear()
                             .domain([0,d3.max(data_y)+10])
                             .range([height, 100]);
@@ -194,39 +193,6 @@ function CreateBarGraph ({ width, height, data, id }){
     
 }
 
-class BarGraph extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            data : datas[0],
-            width : 600,
-            height : 400,
-            id : "bar"
-        }
-    }
-
-
-    changeChart = () => {
-        i++
-        if(i === datas.length) i = 0;
-        this.setState({data: datas[i]});
-
-    }
-
-    render(){
-        return (
-        <div className="BarGraphs" >
-        
-            <h2>Graphs with React</h2>
-            <button onClick={this.changeChart}>Change Data</button>
-        <CreateBarGraph id = {this.state.id} data={this.state.data} width={this.state.width} height={this.state.height} />
-        
-        </div>
-
-    );
-    }
-    
-}
 
 export default BarGraph;
