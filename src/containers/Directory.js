@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import BarGraph from '../components/BarGraph';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import DepartmentsBubble from '../components/BubbleChart';
 
 
 const datas = [
@@ -35,6 +36,7 @@ const Directory = () => {
     }
     
     return (
+        <div>
         <div className="BarGraph" style={{position: 'relative', width: 800, height: 500,}}>
         
         <Dropdown isOpen={dropdownOpen} toggle={toggle} style={{  position: 'relative', top: '20px', left: '10px'}}>
@@ -52,6 +54,10 @@ const Directory = () => {
 
         
         
+        </div>
+        <div className = "Bubble" style={{position: 'relative', width: 800, height: 800,}}>
+            <DepartmentsBubble> </DepartmentsBubble>
+        </div>
         </div>
 
     );
