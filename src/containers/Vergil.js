@@ -4,10 +4,9 @@ import scatterPlot from '../components/scatterPlot'
 
 const Vergil = () => {
     return (
-        <div>
-            Vergil
-            <scatterPlot />
-        </div>   
+        <div>Vergil
+            <scatterPlot width={400} height={300} />
+        </div>
     );
 };
 

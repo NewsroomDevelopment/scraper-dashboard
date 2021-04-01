@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import
 {
     ScatterChart,
@@ -19,7 +19,7 @@ const data = [
     { x: 110, y: 280, z: 200 },
   ];
 
-export default function scatterPlot()
+const scatterPlot = ({width, height}) =>
 {
     //render() {
     return (
@@ -45,4 +45,4 @@ export default function scatterPlot()
   //}
 }
 
-//export default scatterPlot;
+export default scatterPlot;
