@@ -1,48 +1,60 @@
 import React, {PureComponent} from 'react';
-import
-{
-    ScatterChart,
-    Scatter,
-    XAxis,
-    YAxis,
-    Tooltip,
-    CartesianGrid,
-    ResponsiveContainer
-} from 'recharts';
+import { ScatterChart, Scatter, Legend, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
-    { x: 100, y: 200, z: 200 },
-    { x: 120, y: 100, z: 260 },
-    { x: 170, y: 300, z: 400 },
-    { x: 140, y: 250, z: 280 },
-    { x: 150, y: 400, z: 500 },
-    { x: 110, y: 280, z: 200 },
+    {hour: "12a", enrollment: 125, value: 125},
+    {hour: "1a", enrollment: 100, value: 100},
+    {hour: "8a", enrollment: 110, value: 110}
   ];
 
-const scatterPlot = ({width, height}) =>
+  const parseDomain = () => [
+    0,
+    Math.max(
+      Math.max.apply(
+        null,
+        data.map((entry) => entry.value)
+      ), 0
+    )
+  ];
+
+const ScatterPlot = ({ width, height }) =>
 {
-    //render() {
+    const domain = parseDomain();
+    const range = [16, 225];
     return (
-      <ResponsiveContainer width="100%" height="100%">
         <ScatterChart
-          width={400}
-          height={400}
-          margin={{
+        width={600}
+        height={400}
+        margin={{
             top: 20,
             right: 20,
             bottom: 20,
             left: 20,
-          }}
+        }}
         >
-          <CartesianGrid />
-          <XAxis type="number" dataKey="x" name="stature" unit="cm" />
-          <YAxis type="number" dataKey="y" name="weight" unit="kg" />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Scatter name="A school" data={data} fill="#8884d8" />
+        <XAxis 
+            type="category" 
+            dataKey="time" 
+            interval={0} 
+            tick={{ fontSize: 0 }}
+            tickLine={{ transform: "translate(0, -6)" }} 
+        />
+        <YAxis
+            type="number"
+            dataKey="enrollment"
+            height={100}
+            width={80}
+            tick={false}
+            tickLine={false}
+            axisLine={true}
+            label={{ value: "Enrollment %", position: "insideRight" }}
+        />       
+        <ZAxis type="number" dataKey="value" domain={domain} range={range} />
+ 
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        <Scatter name="A school" data={data} fill="#8884d8" />
         </ScatterChart>
-      </ResponsiveContainer>
     );
-  //}
 }
 
-export default scatterPlot;
+export default ScatterPlot;
