@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import scatterPlot from '../components/scatterPlot'
 
 const Vergil = () => {
     return (
-        <div>Vergil</div>
+        <div>
+            Vergil
+            <scatterPlot />
+        </div>
+        
     );
 };
 
