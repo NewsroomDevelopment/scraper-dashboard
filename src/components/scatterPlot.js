@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import
 {
     ScatterChart,
@@ -6,7 +6,6 @@ import
     XAxis,
     YAxis,
     Tooltip,
-    Legend,
     CartesianGrid,
     ResponsiveContainer
 } from 'recharts';
@@ -20,9 +19,9 @@ const data = [
     { x: 110, y: 280, z: 200 },
   ];
 
-  class scatterPlot extends PureComponent
+export default function scatterPlot()
 {
-    render() {
+    //render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
         <ScatterChart
@@ -43,5 +42,7 @@ const data = [
         </ScatterChart>
       </ResponsiveContainer>
     );
-  }
+  //}
 }
+
+//export default scatterPlot;

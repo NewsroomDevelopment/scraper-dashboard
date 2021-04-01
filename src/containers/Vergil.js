@@ -7,8 +7,7 @@ const Vergil = () => {
         <div>
             Vergil
             <scatterPlot />
-        </div>
-        
+        </div>   
     );
 };
 
