@@ -1,48 +1,64 @@
 import React, { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Label,Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
     {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
+        year: 2013,
+        month: 'January',
+        yearAmt: 3908,
+        moAmt: 104202,
     },
     {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
+        year: 2014,
+        month: 'February',
+        yearAmt: 5031,
     },
     {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
+        year: 2015,
+        month: 'March',
+        yearAmt: 12003,
     },
     {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
+        year: 2016,
+        month: 'April',
+        yearAmt: 53000,
     },
     {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
+        year: 2017,
+        month: 'May',
+        yearAmt: 64003,
     },
     {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
+        year: 2018,
+        month: 'June',
+        yearAmt: 78001,
     },
     {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
+        year: 2019,
+        month: 'July',
+        yearAmt: 80459,
+    },
+    {
+        year: 2020,
+        month: 'August',
+        yearAmt: 90576,
+    },
+    {
+        year: 2021,
+        month: 'September',
+        yearAmt: 107165,
+    },
+    {
+        month: 'October',
+        yearAmt: 107165,
+    },
+    {
+        month: 'November',
+        yearAmt: 100000,
+    },
+    {
+        month: 'December',
+        yearAmt: 107165,
     },
 ];
 
@@ -52,23 +68,25 @@ const LineChartRechart = ({ width, height }) => {
 
     return ( 
             <LineChart
-                width={500}
-                height={300}
+                width={600}
+                height={400}
                 data={data}
                 margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
+                    top: 50,
+                    right: 50,
+                    left: 50,
+                    bottom: 50,
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis type="number" dataKey="year" domain={['dataMin', 'dataMax']}>
+                    <Label value="Year" position="bottom" />
+                </XAxis>
+                <YAxis type="number">
+                    <Label value="Number of Entries" position="left" angle="-90" offset="20"/>
+                </YAxis>
                 <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                <Line type="monotone" name="Number of Entries" dataKey="yearAmt" stroke="#8884d8" activeDot={{ r: 8 }} />
             </LineChart>
     )
 };
