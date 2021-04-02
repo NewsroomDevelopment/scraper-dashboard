@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import ScatterPlot from '../components/scatterPlot'
+import AreaChart from '../components/AreaChart'
 
 const Vergil = () => {
     return (
-        <div>Vergil
-            <ScatterPlot width={400} height={300} />
+        <div>Enrollment % in classes by time
+            <ScatterPlot />
+            Departments located in building over semesters
+            <AreaChart />
         </div>
     );
 };

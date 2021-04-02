@@ -2,12 +2,42 @@ import React, {PureComponent} from 'react';
 import { ScatterChart, Scatter, Legend, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
-    {hour: "12a", enrollment: 125, value: 125},
-    {hour: "1a", enrollment: 100, value: 100},
-    {hour: "8a", enrollment: 110, value: 110}
+    {hour: "12a", enrolled: 125/400, students: 125, value: 400},
+    {hour: "1a", enrolled: 100/100, students: 100, value: 100},
+    {hour: "8a", enrolled: 110/110, students: 110, value: 110}
   ];
 
-  const parseDomain = () => [
+const renderTooltip = (props: any) => {
+    const { active, payload } = props;
+  
+    if (active && payload && payload.length) {
+      const data = payload[0] && payload[0].payload;
+  
+      return (
+        <div
+          style={{
+            backgroundColor: "#fff",
+            border: "1px solid #999",
+            margin: 0,
+            padding: 10
+          }}
+        >
+          <p>
+              <span>enrolled: </span>
+              {data.students}
+            </p>
+          <p>
+            <span>class size: </span>
+            {data.value}
+          </p>
+        </div>
+      );
+    }
+  
+    return null;
+};
+
+const parseDomain = () => [
     0,
     Math.max(
       Math.max.apply(
@@ -17,7 +47,7 @@ const data = [
     )
   ];
 
-const ScatterPlot = ({ width, height }) =>
+const ScatterPlot = () =>
 {
     const domain = parseDomain();
     const range = [16, 225];
@@ -34,14 +64,15 @@ const ScatterPlot = ({ width, height }) =>
         >
         <XAxis 
             type="category" 
-            dataKey="time" 
+            dataKey="hour" 
+            label="time"
             interval={0} 
             tick={{ fontSize: 0 }}
             tickLine={{ transform: "translate(0, -6)" }} 
         />
         <YAxis
             type="number"
-            dataKey="enrollment"
+            dataKey="enrolled"
             height={100}
             width={80}
             tick={false}
@@ -51,7 +82,7 @@ const ScatterPlot = ({ width, height }) =>
         />       
         <ZAxis type="number" dataKey="value" domain={domain} range={range} />
  
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} content={renderTooltip}/>
         <Scatter name="A school" data={data} fill="#8884d8" />
         </ScatterChart>
     );
