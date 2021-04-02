@@ -63,6 +63,7 @@ function LineChart(props) {
           .tickSize(-height)
           .tickFormat(''),
       );
+      
 
     // Append the gridlines along the X-axis
     svg
@@ -71,15 +72,17 @@ function LineChart(props) {
       .call(
         d3.axisLeft(yScale)
           .tickSize(-width)
-          .tickFormat(''),
+          .tickFormat(d3.format("d")),
       );
+    
 
     // Append the X-axis
     svg
       .append('g')
       .attr('class', 'x-axis')
       .attr('transform', `translate(0,${height})`)
-      .call(d3.axisBottom().scale(xScale).tickSize(15));
+      .call(d3.axisBottom().scale(xScale).tickSize(15).tickFormat(d3.format("d")));
+      
 
     // Append the Y-axis
     svg
@@ -119,7 +122,7 @@ function LineChart(props) {
       .attr("text-anchor", "end")
       .attr("x", width) 
       .attr("y", height + 45)
-      .text("Date");
+      .text("Year");
     svg.append("text")
       .attr("class", "y label")
       .attr("text-anchor", "end")

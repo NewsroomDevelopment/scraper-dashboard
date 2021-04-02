@@ -13,9 +13,9 @@ const Goco = () => {
 	function regenerateData() {
 	  const chartData = [];
 	  for (let i = 0; i < 20; i++) {
-		const value = (Math.random() * i + 3)*0.1;
+		const value = (Math.random() * i + 3)/20;
 		chartData.push({
-		  label: i,
+		  label: (i + 2000),
 		  value,
 		  tooltipContent: `<b>x: </b>${i}<br><b>y: </b>${value}`
 		});
