@@ -68,8 +68,8 @@ const LineChartRechart = ({ width, height }) => {
 
     return ( 
             <LineChart
-                width={600}
-                height={400}
+                width={500}
+                height={300}
                 data={data}
                 margin={{
                     top: 50,

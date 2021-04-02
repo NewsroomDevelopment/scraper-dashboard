@@ -6,20 +6,26 @@ import styled from 'styled-components';
 
 const Handshake = () => {
     const myStyle = {
-        marginLeft: "100px",
         padding: "50px",
+        display: "flex"
     };
     const graphStyle = {
         padding: "200px"
     }
     return (
-        <div width={1000} style={myStyle}>
-            <h3>Number of Job Postings By Year</h3>
-            <LineChart width={400} height={300} style={{graphStyle}}/> 
-            <h3>Number of Job Postings by Industry </h3>
-            <StackedBar width={400} height={300} style={{graphStyle}}/>
-            <h3>Proportion of Job Postings by Industry</h3>
-            <AreaChart width={400} height={300} style={{graphStyle}}/>
+        <div style={myStyle}>
+            <div>
+                <h3>Number of Job Postings By Year</h3>
+                <LineChart width={400} height={300} style={{graphStyle}}/> 
+            </div>
+            <div>
+                <h3>Number of Job Postings by Industry </h3>
+                <StackedBar width={400} height={300} style={{graphStyle}}/>
+            </div>
+            <div>
+                <h3>Proportion of Job Postings by Industry</h3>
+                <AreaChart width={400} height={300} style={{graphStyle}}/>
+            </div>
             <ol>
                 <li># postings over time: time range, state, company size</li>
                 <li># postings over time by industry: time range, industries to include</li>

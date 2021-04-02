@@ -99,8 +99,8 @@ const renderTooltipContent = (o: any) => {
 export default function App() {
   return (
     <AreaChart
-      width={600}
-      height={400}
+      width={500}
+      height={300}
       data={data}
       stackOffset="expand"
       margin={{
