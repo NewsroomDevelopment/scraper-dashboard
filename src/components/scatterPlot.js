@@ -1,5 +1,7 @@
+import { Dropdown } from 'bootstrap';
 import React, {PureComponent} from 'react';
 import { ScatterChart, Scatter, Legend, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import DropDownScatter from "./dropDownScatter"
 
 const data = [
     {hour: "12a", enrolled: 125/400, students: 125, value: 400},
@@ -52,6 +54,7 @@ const ScatterPlot = () =>
     const domain = parseDomain();
     const range = [16, 225];
     return (
+        <div>
         <ScatterChart
         width={600}
         height={400}
@@ -85,7 +88,7 @@ const ScatterPlot = () =>
         <Tooltip cursor={{ strokeDasharray: '3 3' }} content={renderTooltip}/>
         <Scatter name="A school" data={data} fill="#8884d8" />
         </ScatterChart>
+        </div>
     );
 }
-
 export default ScatterPlot;
