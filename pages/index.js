@@ -1,233 +1,41 @@
-import Head from 'next/head'
-import { connectToDatabase } from '../util/mongodb'
 
-export default function Home({ isConnected }) {
-  return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+import React from 'react';
+import styled from 'styled-components';
+import ScraperSection from './components/ScraperSection';
+import { Container, Row, Col } from 'react-bootstrap';
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js with MongoDB!</a>
-        </h1>
+const Wrapper = styled.div`
+    padding-left:3.5%;
+    padding-right:3.5%;
+    text-align:center;
+`;
 
-        {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
+const TitleWrapper = styled.div`
+    margin: auto;
+    padding: 1rem;
+    width: fit-content;
+    text-align: right;
+    font-size: 2em;
+`;
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+const Index = () => (
+    <>
+        <Wrapper>
+            <TitleWrapper>Scraper Dashboard</TitleWrapper>
+            <div>By the Newsroom Development Team</div>
+            <Container className="justify-content-md-center">
+                <Row className="py-4">
+                    <Col> <ScraperSection image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblupwPskN3qAOj-qZ59iT_nzD1InzuPrM_qcFAt5jo3iQl0KpYmUPaZAarPwJDhgyEi8&usqp=CAU" scraperName="Vergil" link='scrapers/vergil' description='View/Export course data' /> </Col>
+                    <Col> <ScraperSection image="https://www.wilkes.edu/campus-life/student-development/career-development-and-internships/_images/handshake_logo_dark.png" scraperName="Handshake" link='scrapers/handshake' description='View/Export job posting data' /> </Col>
+                    <Col> <ScraperSection image="" scraperName="Directory" link='scrapers/directory' description='View/Export student information data' /> </Col>
+                </Row>
+                <Row className="py-4">
+                    <Col> <ScraperSection image="https://pbs.twimg.com/profile_images/1324430003640143877/bT7Rppq1.jpg" scraperName="Go Columbia Lions" link='scrapers/gocolumbialions' description='View/Export Go Columbia Lions Roster, Schedule, News, and Team Statistics data' /> </Col>
+                    <Col> <ScraperSection image="https://scontent-lga3-2.xx.fbcdn.net/v/t1.0-9/72578370_144637026885253_2576969635886792704_n.png?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=YjO9HVrdsPgAX_6Nhw6&_nc_ht=scontent-lga3-2.xx&oh=e8e8abac7f61e1003fb81e17501e3482&oe=6080007A" scraperName="Columbia Cofessions" link='scrapers/confessions' description='View/Export Columbia Confessions data' /> </Col>
+                </Row>
+            </Container>
+        </Wrapper>
+    </>
+);
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .subtitle {
-          font-size: 2rem;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
-}
-
-export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
-
-  const isConnected = await client.isConnected()
-
-  return {
-    props: { isConnected },
-  }
-}
+export default Index;
