@@ -37,11 +37,20 @@ const Directory = () => {
     
     return (
         <div>
+
+        <h1>Directory Scraper</h1>
+        <h2>Undergrad Distribution Among Departments</h2>
+        <div className = "Bubble" style={{position: 'relative', width: 800, height: 800,}}>
+            <DepartmentsBubble> </DepartmentsBubble>
+        </div>
         <div className="BarGraph" style={{position: 'relative', width: 800, height: 500,}}>
         
+
+        <h2>Current Data</h2>
+        <h3>Top 5 Populated Departments</h3>
         <Dropdown isOpen={dropdownOpen} toggle={toggle} style={{  position: 'relative', top: '20px', left: '10px'}}>
             <DropdownToggle caret>
-            Dropdown
+            School
             </DropdownToggle>
             <DropdownMenu container="body">
                 {dropdownStuff.map((item, index) => {
@@ -55,9 +64,7 @@ const Directory = () => {
         
         
         </div>
-        <div className = "Bubble" style={{position: 'relative', width: 800, height: 800,}}>
-            <DepartmentsBubble> </DepartmentsBubble>
-        </div>
+        <h2>Historical Data</h2>
         </div>
 
     );
