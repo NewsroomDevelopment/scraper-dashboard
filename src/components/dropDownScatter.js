@@ -5,6 +5,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 const DropDownScatter = (props) =>
 {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [lastClicked, setLastClicked] = useState(null);
   
     const toggle = () => setDropdownOpen(prevState => !prevState);
   
@@ -14,12 +15,8 @@ const DropDownScatter = (props) =>
           Dropdown
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem>Some Action</DropdownItem>
-          <DropdownItem text>Dropdown Item Text</DropdownItem>
-          <DropdownItem disabled>Action (disabled)</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Foo Action</DropdownItem>
+          
+          <DropdownItem onClick={() => setLastClicked(3)}>Foo Action</DropdownItem>
           <DropdownItem>Bar Action</DropdownItem>
           <DropdownItem>Quo Action</DropdownItem>
         </DropdownMenu>

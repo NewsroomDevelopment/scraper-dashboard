@@ -1,13 +1,21 @@
-import { Dropdown } from 'bootstrap';
-import React, {PureComponent} from 'react';
+import React, {PureComponent, useState, useEffect} from 'react';
 import { ScatterChart, Scatter, Legend, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import DropDownScatter from "./dropDownScatter"
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const data = [
     {hour: "12a", enrolled: 125/400, students: 125, value: 400},
     {hour: "1a", enrolled: 100/100, students: 100, value: 100},
     {hour: "8a", enrolled: 110/110, students: 110, value: 110}
   ];
+
+const data2 = [
+    {hour: "2a", enrolled: 125/400, students: 125, value: 400},
+    {hour: "9a", enrolled: 100/100, students: 100, value: 100},
+    {hour: "7a", enrolled: 110/110, students: 110, value: 110}
+];
+
+const datas = [data, data2];
+var i = 0;
 
 const renderTooltip = (props: any) => {
     const { active, payload } = props;
@@ -49,12 +57,39 @@ const parseDomain = () => [
     )
   ];
 
+const DropdownScatter = ["option 1", "option 2", "option 3"]
+
 const ScatterPlot = () =>
 {
     const domain = parseDomain();
     const range = [16, 225];
+    
+    useEffect(() => {
+      changeData();
+    }, []);
+
+    const [dropdownOpen, setOpen] = useState(false);
+    const toggle = () => setOpen(!dropdownOpen);
+    const [data, setData] = useState(datas[0]);
+
+    function changeData(){
+      i++
+      if(i === datas.length) i = 0;
+      setData(datas[i])}
+
     return (
         <div>
+        <Dropdown isOpen={dropdownOpen} toggle={toggle} style={{  position: 'relative', top: '20px', left: '10px'}}>
+            <DropdownToggle caret>
+            School
+            </DropdownToggle>
+            <DropdownMenu container="body">
+                {DropdownScatter.map((item, index) => {
+                        return <DropdownItem onClick={() => changeData()}>{item}</DropdownItem>;
+                        })}
+            </DropdownMenu>
+        </Dropdown>
+        
         <ScatterChart
         width={600}
         height={400}
@@ -91,4 +126,5 @@ const ScatterPlot = () =>
         </div>
     );
 }
+
 export default ScatterPlot;
