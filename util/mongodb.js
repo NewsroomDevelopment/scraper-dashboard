@@ -27,8 +27,3 @@ export async function connectToDatabase(MONGODB_URI, MONGODB_DB) {
   cached.conn = await cached.promise
   return cached.conn
 }
-
-
-export async function connectToAWS() {
-  
-}
