@@ -21,6 +21,7 @@ export async function getStaticProps() {
     let s3 = await connectToAWS()
     var getParams = {
         Bucket: "directory-scraper", // your bucket name,
+        Key: "facultyandstaff/2021-04-09T05:27:06.json"
     }
 
     // return s3.listObjects(getParams).promise().then((data) => {
@@ -41,7 +42,7 @@ export async function getStaticProps() {
 
     // })
 
-    return s3.getObject({ Bucket: "directory-scraper", Key: "facultyandstaff/2021-04-09T05:27:06.json" }).promise().then((item) => {
+    return s3.getObject(getParams).promise().then((item) => {
         console.log(JSON.parse(item['Body']))
         return { props: { data: JSON.parse(item['Body']) } }
     })
