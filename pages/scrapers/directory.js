@@ -1,5 +1,5 @@
 import React, { useState, useEffect, PureComponent } from 'react';
-import './index.css';
+//import '.../styles.css';
 import BarGraph from '../components/BarGraph';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import DepartmentsBubble from '../components/BubbleChart';
@@ -83,7 +83,7 @@ const Directory = () => {
 
         <h1>Directory Scraper</h1>
         <h2>Undergrad Distribution Among Departments</h2>
-        <div className = "Bubble" style={{position: 'relative', width: 800, height: 800,}} class = "center">
+        <div className = "Bubble" style={{position: 'relative', width: 800, height: 800,}} >
             <DepartmentsBubble> </DepartmentsBubble>
         </div>
         <div className="BarGraph" style={{position: 'relative', width: 800, height: 500,}}>

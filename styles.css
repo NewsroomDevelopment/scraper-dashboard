@@ -16,3 +16,9 @@ body {
     height: 17.5vw;
     object-fit: contain;
   }
+  .center {
+    margin: auto;
+    width: 60%;
+    border: 5px solid #FFFF00;
+    padding: 10px;
+    }
