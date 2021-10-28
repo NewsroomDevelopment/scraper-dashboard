@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { connectToAWS } from '../../util/aws';
 
+import Sidebar from 'sidebar'
+
 const Vergil = ({data}) => {
     console.log(data)
     return (
-        <div>Vergil</div>
+        <div className="App">
+            <Sidebar />
+        </div>
     );
 };
 
