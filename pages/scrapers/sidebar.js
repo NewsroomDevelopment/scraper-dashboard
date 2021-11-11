@@ -22,8 +22,8 @@ import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
  
 
-const Sidebar = () => {
-  
+const Sidebar = ({handleGraphUpdate, setGraphType}) => {
+    console.log(handleGraphUpdate)
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(false)
 
@@ -57,7 +57,7 @@ const Sidebar = () => {
               <MenuItem active={true} icon={<FiHome />}>
                 Home
               </MenuItem>
-              <MenuItem icon={<FaList />}>Category</MenuItem>
+              <MenuItem icon={<FaList />}><button onClick={() => handleGraphUpdate('BarGraph')}>Bar Graph</button></MenuItem>
               <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
               <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
               <MenuItem icon={<BiCog />}>Settings</MenuItem>

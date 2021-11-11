@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState, Component } from 'react';
 import styled from 'styled-components';
 import { connectToAWS } from '../../util/aws';
-
+import BarGraph from '../components/BarGraph';
 import Sidebar from './sidebar.js'
 
 const Vergil = ({data}) => {
     console.log(data)
-    return (
+    const [graphType, setGraphType] = useState('line')
+
+    function handleGraphUpdate(graphType) {
+        setGraphType(graphType)
+    }
+
+    console.log(graphType)
+
+    return(
         <div className="App">
-            <Sidebar />
+            <Sidebar handleGraphUpdate={handleGraphUpdate} setGraphType={setGraphType} />
+            <BarGraph graphType={graphType} />
         </div>
     );
 };
+
 
 
 export default Vergil;
@@ -24,7 +34,6 @@ export async function getStaticProps() {
     }
 
     return s3.getObject(getParams).promise().then((item) => {
-        console.log(JSON.parse(item['Body']))
-        return { props: { data: JSON.parse(item['Body']) } }
+        return { props: { data: JSON.parse(item['Body'][0]) } }
     })
 }
