@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connectToAWS } from '../../util/aws';
 
-import Sidebar from 'Sidebar/Sidebar'
+import Sidebar from './sidebar.js'
 
 const Vergil = ({data}) => {
     console.log(data)
